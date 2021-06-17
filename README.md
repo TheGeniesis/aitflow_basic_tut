@@ -46,15 +46,22 @@ Add sqlite connection in panel
 - `ALTER USER postgres PASSWORD 'postgres';`
 - `\q`
 - `pip install 'apache-airflow[postgres]'`
-- Update executor and sql_alchemy_conn
+- Update executor to localExecutor and sql_alchemy_conn
 - Stop webserver  
 - `airflow db init`
 - `airflow users create -u admin -p password -l admin -f admin -e admin@airflow.com -r Admin`
 - Start airflow
 
-# Queue
+## Queue
 
 - `pip install 'apache-airflow[celery]'`
+- `pip install 'apache-airflow[redis]'`
 - `sudo apt install redis`
 - Change supervised to systemd `sudo vim /etc/redis/redis.conf`
 - `sudo systemctl redis.service`
+- Change executor to CeleryExecutor
+- Check running tasks `airflow celery flower`
+- Start worker `airflow celery worker`
+
+## Remove examples
+- Set `load_examples` to `False
