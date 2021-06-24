@@ -2,7 +2,7 @@
 
 ## Setup env
 
-- Create instance `multipass launch -m 5G -n airflow-tut`
+- Create instance `multipass launch -m 6G -n airflow-tut`
 - Log into `multipass shell airflow-tut`
 - Add ssh your key `vim ~/.ssh/authorized_keys` 
 - `sudo apt update`
@@ -64,4 +64,15 @@ Add sqlite connection in panel
 - Start worker `airflow celery worker`
 
 ## Remove examples
-- Set `load_examples` to `False
+- Set `load_examples` to `False`
+
+## Install elastic
+
+- `curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -`
+- `echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list`
+- `sudo apt update && sudo apt install elasticsearch`
+- `pip install elasticsearch==7.10.1`
+- `sudo systemctl start elasticsearch`
+- `curl -X GET 'http://localhost:9200'`
+
+> The password is airflow
